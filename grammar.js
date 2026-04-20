@@ -388,17 +388,17 @@
           seq(
             field("head", $._expression),
             "[",
-            field("arguments", $._expression),
+            optional(field("arguments", $._expression)),
             "]",
           ),
         ),
 
       group: ($) =>
         choice(
-          seq("{", $._expression, "}"),
-          seq("(", $._expression, ")"),
-          seq("[", $._expression, "]"),
-          seq("<|", $._expression, "|>"),
+          seq("{", optional($._expression), "}"),
+          seq("(", optional($._expression), ")"),
+          seq("[", optional($._expression), "]"),
+          seq("<|", optional($._expression), "|>"),
         ),
     },
   })));

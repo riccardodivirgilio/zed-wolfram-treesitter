@@ -1,4 +1,16 @@
 ================
+Function call - no arguments
+================
+
+f[]
+
+---
+
+(source_file
+  (call
+    head: (symbol)))
+
+================
 Function call - single argument
 ================
 
