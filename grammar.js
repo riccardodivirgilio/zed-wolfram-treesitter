@@ -193,10 +193,11 @@
           $.call,
           $.part,
           $.span,
+          $.pattern,
           $.group,
         ),
 
-      _leaf: ($) => choice($.symbol, $.integer, $.real, $.string),
+      _leaf: ($) => choice($.symbol, $.integer, $.real, $.string, $.blank, $.blank_sequence, $.blank_null_sequence),
 
       symbol: ($) => /\$?[a-zA-Z][a-zA-Z0-9\$]*/,
 
@@ -205,6 +206,35 @@
       real: ($) => /([0-9]+\^\^)?([0-9a-zA-Z]+\.[0-9a-zA-Z]*|\.[0-9a-zA-Z]+)`{0,2}[0-9]*(\*\^-?[0-9]+)?/,
 
       string: ($) => /\"([^\"\\]|\\.)*\"/,
+
+      // _ with optional head: _, _Integer
+      blank: ($) =>
+        prec.left(PRECEDENCE_UNDER, seq(
+          "_",
+          optional(token.immediate(/[a-zA-Z][a-zA-Z0-9$]*/)),
+        )),
+
+      // __ with optional head: __, __Integer
+      blank_sequence: ($) =>
+        prec.left(PRECEDENCE_UNDER, seq(
+          "__",
+          optional(token.immediate(/[a-zA-Z][a-zA-Z0-9$]*/)),
+        )),
+
+      // ___ with optional head: ___, ___Integer
+      blank_null_sequence: ($) =>
+        prec.left(PRECEDENCE_UNDER, seq(
+          "___",
+          optional(token.immediate(/[a-zA-Z][a-zA-Z0-9$]*/)),
+        )),
+
+      // x_ is Pattern[x, Blank[]], x_Integer is Pattern[x, Blank[Integer]]
+      pattern: ($) =>
+        prec(PRECEDENCE_UNDER, seq(
+          field("name", $.symbol),
+          field("constraint", choice($.blank, $.blank_sequence, $.blank_null_sequence)),
+        )),
+
 
       prefix: ($) =>
         choice(
@@ -314,6 +344,10 @@
           prec.left(
             PRECEDENCE_INFIX_QUESTION,
             seq($._expression, "?", $._expression),
+          ),
+          prec.left(
+            PRECEDENCE_FAKE_PATTERNCOLON,
+            seq($._expression, ":", $._expression),
           ),
         ),
 

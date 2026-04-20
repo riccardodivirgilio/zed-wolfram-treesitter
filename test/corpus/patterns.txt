@@ -1,0 +1,216 @@
+================
+Blank
+================
+
+_
+
+---
+
+(source_file
+  (blank))
+
+================
+Blank with head
+================
+
+_Integer
+
+---
+
+(source_file
+  (blank))
+
+================
+BlankSequence
+================
+
+__
+
+---
+
+(source_file
+  (blank_sequence))
+
+================
+BlankNullSequence
+================
+
+___
+
+---
+
+(source_file
+  (blank_null_sequence))
+
+================
+Named pattern - Blank
+================
+
+x_
+
+---
+
+(source_file
+  (pattern
+    name: (symbol)
+    constraint: (blank)))
+
+================
+Named pattern - Blank with head
+================
+
+x_Integer
+
+---
+
+(source_file
+  (pattern
+    name: (symbol)
+    constraint: (blank)))
+
+================
+Named pattern - BlankSequence
+================
+
+x__
+
+---
+
+(source_file
+  (pattern
+    name: (symbol)
+    constraint: (blank_sequence)))
+
+================
+Named pattern - BlankNullSequence
+================
+
+x___
+
+---
+
+(source_file
+  (pattern
+    name: (symbol)
+    constraint: (blank_null_sequence)))
+
+================
+Pattern - long form
+================
+
+x : _
+
+---
+
+(source_file
+  (binary
+    (symbol)
+    (blank)))
+
+================
+Optional - long form
+================
+
+x : _ : 1
+
+---
+
+(source_file
+  (binary
+    (binary
+      (symbol)
+      (blank))
+    (integer)))
+
+================
+Optional - shorthand
+================
+
+f[x_ : 1]
+
+---
+
+(source_file
+  (call
+    head: (symbol)
+    arguments: (binary
+      (pattern
+        name: (symbol)
+        constraint: (blank))
+      (integer))))
+
+================
+PatternTest
+================
+
+x_?EvenQ
+
+---
+
+(source_file
+  (binary
+    (pattern
+      name: (symbol)
+      constraint: (blank))
+    (symbol)))
+
+================
+Condition
+================
+
+x_ /; x > 1
+
+---
+
+(source_file
+  (binary
+    (pattern
+      name: (symbol)
+      constraint: (blank))
+    (infix
+      (symbol)
+      (integer))))
+
+================
+Function definition with patterns
+================
+
+f[x_, y_] := x + y
+
+---
+
+(source_file
+  (binary
+    (call
+      head: (symbol)
+      arguments: (infix
+        (pattern
+          name: (symbol)
+          constraint: (blank))
+        (pattern
+          name: (symbol)
+          constraint: (blank))))
+    (infix
+      (symbol)
+      (symbol))))
+
+================
+Condition on definition
+================
+
+f[x_] /; x > 0 := x
+
+---
+
+(source_file
+  (binary
+    (binary
+      (call
+        head: (symbol)
+        arguments: (pattern
+          name: (symbol)
+          constraint: (blank)))
+      (infix
+        (symbol)
+        (integer)))
+    (symbol)))
