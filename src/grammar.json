@@ -77,7 +77,7 @@
     },
     "string": {
       "type": "PATTERN",
-      "value": "\\\"[^\\\"]*\\\""
+      "value": "\\\"([^\\\"\\\\]|\\\\.)*\\\""
     },
     "prefix": {
       "type": "CHOICE",
