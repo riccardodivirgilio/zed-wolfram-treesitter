@@ -39,6 +39,34 @@ f[x, y]
       (symbol))))
 
 ================
+Part extraction
+================
+
+a[[1]]
+
+---
+
+(source_file
+  (part
+    head: (symbol)
+    arguments: (integer)))
+
+================
+Part extraction - multiple indices
+================
+
+a[[1, 2]]
+
+---
+
+(source_file
+  (part
+    head: (symbol)
+    arguments: (infix
+      (integer)
+      (integer))))
+
+================
 Nested function call
 ================
 

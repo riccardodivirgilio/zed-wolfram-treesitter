@@ -190,6 +190,7 @@
           $.binary,
           $.infix,
           $.call,
+          $.part,
           $.group,
         ),
 
@@ -390,6 +391,17 @@
             "[",
             optional(field("arguments", $._expression)),
             "]",
+          ),
+        ),
+
+      part: ($) =>
+        prec(
+          PRECEDENCE_CALL,
+          seq(
+            field("head", $._expression),
+            "[[",
+            optional(field("arguments", $._expression)),
+            "]]",
           ),
         ),
 
