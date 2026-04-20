@@ -16,6 +16,10 @@
           "named": true
         },
         {
+          "type": "blank_default",
+          "named": true
+        },
+        {
           "type": "blank_null_sequence",
           "named": true
         },
@@ -80,6 +84,11 @@
     "fields": {}
   },
   {
+    "type": "blank_default",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "blank_null_sequence",
     "named": true,
     "fields": {}
@@ -103,6 +112,10 @@
           },
           {
             "type": "blank",
+            "named": true
+          },
+          {
+            "type": "blank_default",
             "named": true
           },
           {
@@ -173,6 +186,10 @@
           },
           {
             "type": "blank",
+            "named": true
+          },
+          {
+            "type": "blank_default",
             "named": true
           },
           {
@@ -252,6 +269,10 @@
           "named": true
         },
         {
+          "type": "blank_default",
+          "named": true
+        },
+        {
           "type": "blank_null_sequence",
           "named": true
         },
@@ -324,6 +345,10 @@
         },
         {
           "type": "blank",
+          "named": true
+        },
+        {
+          "type": "blank_default",
           "named": true
         },
         {
@@ -402,6 +427,10 @@
             "named": true
           },
           {
+            "type": "blank_default",
+            "named": true
+          },
+          {
             "type": "blank_null_sequence",
             "named": true
           },
@@ -469,6 +498,10 @@
           },
           {
             "type": "blank",
+            "named": true
+          },
+          {
+            "type": "blank_default",
             "named": true
           },
           {
@@ -544,6 +577,10 @@
             "named": true
           },
           {
+            "type": "blank_default",
+            "named": true
+          },
+          {
             "type": "blank_null_sequence",
             "named": true
           },
@@ -579,6 +616,10 @@
         },
         {
           "type": "blank",
+          "named": true
+        },
+        {
+          "type": "blank_default",
           "named": true
         },
         {
@@ -654,6 +695,10 @@
         },
         {
           "type": "blank",
+          "named": true
+        },
+        {
+          "type": "blank_default",
           "named": true
         },
         {
@@ -733,6 +778,10 @@
           "named": true
         },
         {
+          "type": "blank_default",
+          "named": true
+        },
+        {
           "type": "blank_null_sequence",
           "named": true
         },
@@ -805,6 +854,10 @@
         },
         {
           "type": "blank",
+          "named": true
+        },
+        {
+          "type": "blank_default",
           "named": true
         },
         {

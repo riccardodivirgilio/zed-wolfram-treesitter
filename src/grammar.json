@@ -79,6 +79,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "blank_default"
+        },
+        {
+          "type": "SYMBOL",
           "name": "blank_sequence"
         },
         {
@@ -127,6 +131,26 @@
                 "type": "BLANK"
               }
             ]
+          }
+        ]
+      }
+    },
+    "blank_default": {
+      "type": "PREC",
+      "value": 188,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "_"
+          },
+          {
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "."
+            }
           }
         ]
       }
@@ -210,6 +234,10 @@
                 {
                   "type": "SYMBOL",
                   "name": "blank"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "blank_default"
                 },
                 {
                   "type": "SYMBOL",

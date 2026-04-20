@@ -197,7 +197,7 @@
           $.group,
         ),
 
-      _leaf: ($) => choice($.symbol, $.integer, $.real, $.string, $.blank, $.blank_sequence, $.blank_null_sequence),
+      _leaf: ($) => choice($.symbol, $.integer, $.real, $.string, $.blank, $.blank_default, $.blank_sequence, $.blank_null_sequence),
 
       symbol: ($) => /\$?[a-zA-Z][a-zA-Z0-9\$]*/,
 
@@ -213,6 +213,10 @@
           "_",
           optional(token.immediate(/[a-zA-Z][a-zA-Z0-9$]*/)),
         )),
+
+      // _. — Optional with built-in default: Optional[Blank[]]
+      blank_default: ($) =>
+        prec(PRECEDENCE_UNDER, seq("_", token.immediate("."))),
 
       // __ with optional head: __, __Integer
       blank_sequence: ($) =>
@@ -232,7 +236,7 @@
       pattern: ($) =>
         prec(PRECEDENCE_UNDER, seq(
           field("name", $.symbol),
-          field("constraint", choice($.blank, $.blank_sequence, $.blank_null_sequence)),
+          field("constraint", choice($.blank, $.blank_default, $.blank_sequence, $.blank_null_sequence)),
         )),
 
 
