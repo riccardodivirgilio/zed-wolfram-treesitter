@@ -179,6 +179,7 @@
 
     externals: ($) => [$.comment],
 
+
     rules: {
       source_file: ($) => repeat($._expression),
 
@@ -190,18 +191,54 @@
           $.binary,
           $.infix,
           $.call,
+          $.part,
+          $.span,
+          $.pattern,
           $.group,
         ),
 
-      _leaf: ($) => choice($.symbol, $.integer, $.real, $.string),
+      _leaf: ($) => choice($.symbol, $.integer, $.real, $.string, $.blank, $.blank_default, $.blank_sequence, $.blank_null_sequence),
 
-      symbol: ($) => /\$?[a-zA-Z][a-zA-Z0-9\$]*/,
+      symbol: ($) => /`?(\$?[a-zA-Z][a-zA-Z0-9\$]*`)*\$?[a-zA-Z][a-zA-Z0-9\$]*/,
 
-      integer: ($) => /[0-9]+/,
+      integer: ($) => /([0-9]+\^\^)?[0-9a-zA-Z]+`{0,2}[0-9]*(\*\^-?[0-9]+)?/,
 
-      real: ($) => /[0-9]+\.[0-9]/,
+      real: ($) => /([0-9]+\^\^)?([0-9a-zA-Z]+\.[0-9a-zA-Z]*|\.[0-9a-zA-Z]+)`{0,2}[0-9]*(\*\^-?[0-9]+)?/,
 
-      string: ($) => /\"[^\"]*\"/,
+      string: ($) => /\"([^\"\\]|\\.)*\"/,
+
+      // _ with optional head: _, _Integer
+      blank: ($) =>
+        prec.left(PRECEDENCE_UNDER, seq(
+          "_",
+          optional(token.immediate(/[a-zA-Z][a-zA-Z0-9$]*/)),
+        )),
+
+      // _. — Optional with built-in default: Optional[Blank[]]
+      blank_default: ($) =>
+        prec(PRECEDENCE_UNDER, seq("_", token.immediate("."))),
+
+      // __ with optional head: __, __Integer
+      blank_sequence: ($) =>
+        prec.left(PRECEDENCE_UNDER, seq(
+          "__",
+          optional(token.immediate(/[a-zA-Z][a-zA-Z0-9$]*/)),
+        )),
+
+      // ___ with optional head: ___, ___Integer
+      blank_null_sequence: ($) =>
+        prec.left(PRECEDENCE_UNDER, seq(
+          "___",
+          optional(token.immediate(/[a-zA-Z][a-zA-Z0-9$]*/)),
+        )),
+
+      // x_ is Pattern[x, Blank[]], x_Integer is Pattern[x, Blank[Integer]]
+      pattern: ($) =>
+        prec(PRECEDENCE_UNDER, seq(
+          field("name", $.symbol),
+          field("constraint", choice($.blank, $.blank_default, $.blank_sequence, $.blank_null_sequence)),
+        )),
+
 
       prefix: ($) =>
         choice(
@@ -223,6 +260,7 @@
           prec(PRECEDENCE_POSTFIX_BANGBANG, seq($._expression, "!!")),
           prec(PRECEDENCE_POSTFIX_MINUSMINUS, seq($._expression, "--")),
           prec(PRECEDENCE_POSTFIX_PLUSPLUS, seq($._expression, "++")),
+          prec(PRECEDENCE_FAKE_EQUALDOT, seq($._expression, "=.")),
         ),
 
       binary: ($) =>
@@ -243,6 +281,10 @@
           prec.left(
             PRECEDENCE_BARMINUSGREATER,
             seq($._expression, "|->", $._expression),
+          ),
+          prec.right(
+            PRECEDENCE_SLASHCOLON,
+            seq($._expression, "/:", $._expression),
           ),
           prec.left(
             PRECEDENCE_SLASHSLASH,
@@ -311,6 +353,10 @@
           prec.left(
             PRECEDENCE_INFIX_QUESTION,
             seq($._expression, "?", $._expression),
+          ),
+          prec.left(
+            PRECEDENCE_FAKE_PATTERNCOLON,
+            seq($._expression, ":", $._expression),
           ),
         ),
 
@@ -388,17 +434,48 @@
           seq(
             field("head", $._expression),
             "[",
-            field("arguments", $._expression),
+            optional(field("arguments", $._expression)),
             "]",
+          ),
+        ),
+
+      part: ($) =>
+        prec(
+          PRECEDENCE_CALL,
+          seq(
+            field("head", $._expression),
+            "[[",
+            optional(field("arguments", $._expression)),
+            "]]",
+          ),
+        ),
+
+      span: ($) =>
+        choice(
+          prec.right(
+            PRECEDENCE_PREFIX_MINUS - 1,
+            seq($._expression, ";;", $._expression),
+          ),
+          prec.right(
+            PRECEDENCE_PREFIX_MINUS - 1,
+            seq($._expression, ";;"),
+          ),
+          prec.right(
+            PRECEDENCE_CALL + 1,
+            seq(";;", $._expression),
+          ),
+          prec.right(
+            PRECEDENCE_CALL + 1,
+            ";;",
           ),
         ),
 
       group: ($) =>
         choice(
-          seq("{", $._expression, "}"),
-          seq("(", $._expression, ")"),
-          seq("[", $._expression, "]"),
-          seq("<|", $._expression, "|>"),
+          seq("{", optional($._expression), "}"),
+          seq("(", optional($._expression), ")"),
+          seq("[", optional($._expression), "]"),
+          seq("<|", optional($._expression), "|>"),
         ),
     },
   })));

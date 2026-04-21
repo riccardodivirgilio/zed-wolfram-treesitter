@@ -12,6 +12,22 @@
           "named": true
         },
         {
+          "type": "blank",
+          "named": true
+        },
+        {
+          "type": "blank_default",
+          "named": true
+        },
+        {
+          "type": "blank_null_sequence",
+          "named": true
+        },
+        {
+          "type": "blank_sequence",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
@@ -28,6 +44,14 @@
           "named": true
         },
         {
+          "type": "part",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
           "type": "postfix",
           "named": true
         },
@@ -37,6 +61,10 @@
         },
         {
           "type": "real",
+          "named": true
+        },
+        {
+          "type": "span",
           "named": true
         },
         {
@@ -51,15 +79,51 @@
     }
   },
   {
+    "type": "blank",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "blank_default",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "blank_null_sequence",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "blank_sequence",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "call",
     "named": true,
     "fields": {
       "arguments": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "binary",
+            "named": true
+          },
+          {
+            "type": "blank",
+            "named": true
+          },
+          {
+            "type": "blank_default",
+            "named": true
+          },
+          {
+            "type": "blank_null_sequence",
+            "named": true
+          },
+          {
+            "type": "blank_sequence",
             "named": true
           },
           {
@@ -79,6 +143,14 @@
             "named": true
           },
           {
+            "type": "part",
+            "named": true
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
             "type": "postfix",
             "named": true
           },
@@ -88,6 +160,10 @@
           },
           {
             "type": "real",
+            "named": true
+          },
+          {
+            "type": "span",
             "named": true
           },
           {
@@ -109,6 +185,22 @@
             "named": true
           },
           {
+            "type": "blank",
+            "named": true
+          },
+          {
+            "type": "blank_default",
+            "named": true
+          },
+          {
+            "type": "blank_null_sequence",
+            "named": true
+          },
+          {
+            "type": "blank_sequence",
+            "named": true
+          },
+          {
             "type": "call",
             "named": true
           },
@@ -125,6 +217,14 @@
             "named": true
           },
           {
+            "type": "part",
+            "named": true
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
             "type": "postfix",
             "named": true
           },
@@ -134,6 +234,10 @@
           },
           {
             "type": "real",
+            "named": true
+          },
+          {
+            "type": "span",
             "named": true
           },
           {
@@ -154,10 +258,26 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "binary",
+          "named": true
+        },
+        {
+          "type": "blank",
+          "named": true
+        },
+        {
+          "type": "blank_default",
+          "named": true
+        },
+        {
+          "type": "blank_null_sequence",
+          "named": true
+        },
+        {
+          "type": "blank_sequence",
           "named": true
         },
         {
@@ -177,6 +297,14 @@
           "named": true
         },
         {
+          "type": "part",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
           "type": "postfix",
           "named": true
         },
@@ -186,6 +314,10 @@
         },
         {
           "type": "real",
+          "named": true
+        },
+        {
+          "type": "span",
           "named": true
         },
         {
@@ -212,6 +344,22 @@
           "named": true
         },
         {
+          "type": "blank",
+          "named": true
+        },
+        {
+          "type": "blank_default",
+          "named": true
+        },
+        {
+          "type": "blank_null_sequence",
+          "named": true
+        },
+        {
+          "type": "blank_sequence",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
@@ -228,6 +376,14 @@
           "named": true
         },
         {
+          "type": "part",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
           "type": "postfix",
           "named": true
         },
@@ -240,6 +396,10 @@
           "named": true
         },
         {
+          "type": "span",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -248,6 +408,198 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "part",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "binary",
+            "named": true
+          },
+          {
+            "type": "blank",
+            "named": true
+          },
+          {
+            "type": "blank_default",
+            "named": true
+          },
+          {
+            "type": "blank_null_sequence",
+            "named": true
+          },
+          {
+            "type": "blank_sequence",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "group",
+            "named": true
+          },
+          {
+            "type": "infix",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "part",
+            "named": true
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "postfix",
+            "named": true
+          },
+          {
+            "type": "prefix",
+            "named": true
+          },
+          {
+            "type": "real",
+            "named": true
+          },
+          {
+            "type": "span",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      },
+      "head": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary",
+            "named": true
+          },
+          {
+            "type": "blank",
+            "named": true
+          },
+          {
+            "type": "blank_default",
+            "named": true
+          },
+          {
+            "type": "blank_null_sequence",
+            "named": true
+          },
+          {
+            "type": "blank_sequence",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "group",
+            "named": true
+          },
+          {
+            "type": "infix",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "part",
+            "named": true
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "postfix",
+            "named": true
+          },
+          {
+            "type": "prefix",
+            "named": true
+          },
+          {
+            "type": "real",
+            "named": true
+          },
+          {
+            "type": "span",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "pattern",
+    "named": true,
+    "fields": {
+      "constraint": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "blank",
+            "named": true
+          },
+          {
+            "type": "blank_default",
+            "named": true
+          },
+          {
+            "type": "blank_null_sequence",
+            "named": true
+          },
+          {
+            "type": "blank_sequence",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "symbol",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -263,6 +615,22 @@
           "named": true
         },
         {
+          "type": "blank",
+          "named": true
+        },
+        {
+          "type": "blank_default",
+          "named": true
+        },
+        {
+          "type": "blank_null_sequence",
+          "named": true
+        },
+        {
+          "type": "blank_sequence",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
@@ -279,6 +647,14 @@
           "named": true
         },
         {
+          "type": "part",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
           "type": "postfix",
           "named": true
         },
@@ -288,6 +664,10 @@
         },
         {
           "type": "real",
+          "named": true
+        },
+        {
+          "type": "span",
           "named": true
         },
         {
@@ -314,6 +694,22 @@
           "named": true
         },
         {
+          "type": "blank",
+          "named": true
+        },
+        {
+          "type": "blank_default",
+          "named": true
+        },
+        {
+          "type": "blank_null_sequence",
+          "named": true
+        },
+        {
+          "type": "blank_sequence",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
@@ -330,6 +726,14 @@
           "named": true
         },
         {
+          "type": "part",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
           "type": "postfix",
           "named": true
         },
@@ -339,6 +743,10 @@
         },
         {
           "type": "real",
+          "named": true
+        },
+        {
+          "type": "span",
           "named": true
         },
         {
@@ -366,6 +774,22 @@
           "named": true
         },
         {
+          "type": "blank",
+          "named": true
+        },
+        {
+          "type": "blank_default",
+          "named": true
+        },
+        {
+          "type": "blank_null_sequence",
+          "named": true
+        },
+        {
+          "type": "blank_sequence",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
@@ -382,6 +806,14 @@
           "named": true
         },
         {
+          "type": "part",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
           "type": "postfix",
           "named": true
         },
@@ -391,6 +823,89 @@
         },
         {
           "type": "real",
+          "named": true
+        },
+        {
+          "type": "span",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "span",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binary",
+          "named": true
+        },
+        {
+          "type": "blank",
+          "named": true
+        },
+        {
+          "type": "blank_default",
+          "named": true
+        },
+        {
+          "type": "blank_null_sequence",
+          "named": true
+        },
+        {
+          "type": "blank_sequence",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "group",
+          "named": true
+        },
+        {
+          "type": "infix",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "part",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
+          "type": "postfix",
+          "named": true
+        },
+        {
+          "type": "prefix",
+          "named": true
+        },
+        {
+          "type": "real",
+          "named": true
+        },
+        {
+          "type": "span",
           "named": true
         },
         {
@@ -521,6 +1036,10 @@
     "named": false
   },
   {
+    "type": "/:",
+    "named": false
+  },
+  {
     "type": "/;",
     "named": false
   },
@@ -533,6 +1052,10 @@
     "named": false
   },
   {
+    "type": ":",
+    "named": false
+  },
+  {
     "type": ":=",
     "named": false
   },
@@ -542,6 +1065,10 @@
   },
   {
     "type": ";",
+    "named": false
+  },
+  {
+    "type": ";;",
     "named": false
   },
   {
@@ -570,6 +1097,10 @@
   },
   {
     "type": "=!=",
+    "named": false
+  },
+  {
+    "type": "=.",
     "named": false
   },
   {
@@ -613,7 +1144,15 @@
     "named": false
   },
   {
+    "type": "[[",
+    "named": false
+  },
+  {
     "type": "]",
+    "named": false
+  },
+  {
+    "type": "]]",
     "named": false
   },
   {
@@ -626,6 +1165,18 @@
   },
   {
     "type": "^=",
+    "named": false
+  },
+  {
+    "type": "_",
+    "named": false
+  },
+  {
+    "type": "__",
+    "named": false
+  },
+  {
+    "type": "___",
     "named": false
   },
   {

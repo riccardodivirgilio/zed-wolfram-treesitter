@@ -1,0 +1,413 @@
+================
+Function call - no arguments
+================
+
+f[]
+
+---
+
+(source_file
+  (call
+    head: (symbol)))
+
+================
+Function call - single argument
+================
+
+f[x]
+
+---
+
+(source_file
+  (call
+    head: (symbol)
+    arguments: (symbol)))
+
+================
+Function call - multiple arguments
+================
+
+f[x, y]
+
+---
+
+(source_file
+  (call
+    head: (symbol)
+    arguments: (infix
+      (symbol)
+      (symbol))))
+
+================
+Part extraction
+================
+
+a[[1]]
+
+---
+
+(source_file
+  (part
+    head: (symbol)
+    arguments: (integer)))
+
+================
+Part extraction - multiple indices
+================
+
+a[[1, 2]]
+
+---
+
+(source_file
+  (part
+    head: (symbol)
+    arguments: (infix
+      (integer)
+      (integer))))
+
+================
+Span - both bounds
+================
+
+a[[1;;4]]
+
+---
+
+(source_file
+  (part
+    head: (symbol)
+    arguments: (span
+      (integer)
+      (integer))))
+
+================
+Span - start only
+================
+
+a[[1;;]]
+
+---
+
+(source_file
+  (part
+    head: (symbol)
+    arguments: (span
+      (integer))))
+
+================
+Span - end only
+================
+
+a[[;;4]]
+
+---
+
+(source_file
+  (part
+    head: (symbol)
+    arguments: (span
+      (integer))))
+
+================
+Span - no bounds
+================
+
+a[[;;]]
+
+---
+
+(source_file
+  (part
+    head: (symbol)
+    arguments: (span)))
+
+================
+Nested function call
+================
+
+f[g[x]]
+
+---
+
+(source_file
+  (call
+    head: (symbol)
+    arguments: (call
+      head: (symbol)
+      arguments: (symbol))))
+
+================
+Addition
+================
+
+x + y
+
+---
+
+(source_file
+  (infix
+    (symbol)
+    (symbol)))
+
+================
+Assignment - Set
+================
+
+x = 5
+
+---
+
+(source_file
+  (binary
+    (symbol)
+    (integer)))
+
+================
+Assignment - SetDelayed
+================
+
+f[x] := x
+
+---
+
+(source_file
+  (binary
+    (call
+      head: (symbol)
+      arguments: (symbol))
+    (symbol)))
+
+================
+Prefix - Not
+================
+
+!x
+
+---
+
+(source_file
+  (prefix
+    (symbol)))
+
+================
+Postfix - Function
+================
+
+x &
+
+---
+
+(source_file
+  (postfix
+    (symbol)))
+
+================
+Logical And
+================
+
+x && y
+
+---
+
+(source_file
+  (infix
+    (symbol)
+    (symbol)))
+
+================
+Comparison - Equal
+================
+
+x == y
+
+---
+
+(source_file
+  (infix
+    (symbol)
+    (symbol)))
+
+================
+Rule operator
+================
+
+a -> 1
+
+---
+
+(source_file
+  (binary
+    (symbol)
+    (integer)))
+
+================
+Postfix application
+================
+
+x // f
+
+---
+
+(source_file
+  (binary
+    (symbol)
+    (symbol)))
+
+================
+Apply
+================
+
+f @@ {1, 2}
+
+---
+
+(source_file
+  (binary
+    (symbol)
+    (group
+      (infix
+        (integer)
+        (integer)))))
+
+================
+Association
+================
+
+<|a -> 1, b -> 2|>
+
+---
+
+(source_file
+  (group
+    (infix
+      (binary
+        (symbol)
+        (integer))
+      (binary
+        (symbol)
+        (integer)))))
+
+================
+List
+================
+
+{1, 2, 3}
+
+---
+
+(source_file
+  (group
+    (infix
+      (infix
+        (integer)
+        (integer))
+      (integer))))
+
+================
+Parenthesized expression
+================
+
+(x + y)
+
+---
+
+(source_file
+  (group
+    (infix
+      (symbol)
+      (symbol))))
+
+================
+String in function call
+================
+
+f["hello"]
+
+---
+
+(source_file
+  (call
+    head: (symbol)
+    arguments: (string)))
+
+================
+Compound expression
+================
+
+x; y
+
+---
+
+(source_file
+  (infix
+    (symbol)
+    (symbol)))
+
+================
+Unset
+================
+
+x =.
+
+---
+
+(source_file
+  (postfix
+    (symbol)))
+
+================
+TagUnset
+================
+
+f /: f[x_] =.
+
+---
+
+(source_file
+  (postfix
+    (binary
+      (symbol)
+      (call
+        head: (symbol)
+        arguments: (pattern
+          name: (symbol)
+          constraint: (blank))))))
+
+================
+TagSetDelayed
+================
+
+f /: f[x_] := 1
+
+---
+
+(source_file
+  (binary
+    (binary
+      (symbol)
+      (call
+        head: (symbol)
+        arguments: (pattern
+          name: (symbol)
+          constraint: (blank))))
+    (integer)))
+
+================
+TagSet
+================
+
+f /: f[x_] = 1
+
+---
+
+(source_file
+  (binary
+    (binary
+      (symbol)
+      (call
+        head: (symbol)
+        arguments: (pattern
+          name: (symbol)
+          constraint: (blank))))
+    (integer)))

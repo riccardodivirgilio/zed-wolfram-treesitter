@@ -1,0 +1,177 @@
+================
+Integer
+================
+
+11
+
+---
+
+(source_file
+  (integer))
+
+================
+Real number
+================
+
+11.11
+
+---
+
+(source_file
+  (real))
+
+================
+Real number - no trailing digits
+================
+
+11.
+
+---
+
+(source_file
+  (real))
+
+================
+Real number - no leading digits
+================
+
+.11
+
+---
+
+(source_file
+  (real))
+
+================
+Simple string
+================
+
+"hello"
+
+---
+
+(source_file
+  (string))
+
+================
+String with escaped quote
+================
+
+"hello \"world\""
+
+---
+
+(source_file
+  (string))
+
+================
+String with backslash escape
+================
+
+"tab\tnewline\n"
+
+---
+
+(source_file
+  (string))
+
+================
+Empty string
+================
+
+""
+
+---
+
+(source_file
+  (string))
+
+================
+String with backtick
+================
+
+"this`is`a`context"
+
+---
+
+(source_file
+  (string))
+
+================
+Symbol - simple
+================
+
+foo
+
+---
+
+(source_file
+  (symbol))
+
+================
+Symbol - with dollar sign
+================
+
+foo$bar12
+
+---
+
+(source_file
+  (symbol))
+
+================
+Symbol - dollar prefix
+================
+
+$foo
+
+---
+
+(source_file
+  (symbol))
+
+================
+Symbol - context qualified
+================
+
+Global`x
+
+---
+
+(source_file
+  (symbol))
+
+================
+Symbol - nested context
+================
+
+my`contex`f
+
+---
+
+(source_file
+  (symbol))
+
+================
+Symbol - relative context (leading backtick)
+================
+
+`localSymbol
+
+---
+
+(source_file
+  (symbol))
+
+================
+Symbol - context qualified call
+================
+
+my`contex`f[my`var`x]
+
+---
+
+(source_file
+  (call
+    head: (symbol)
+    arguments: (symbol)))
