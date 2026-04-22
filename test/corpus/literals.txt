@@ -210,7 +210,7 @@ Slot - number followed by letter
   (symbol))
 
 ================
-SlotSequence - zero is not valid
+SlotSequence - zero
 ================
 
 ##0
@@ -218,8 +218,7 @@ SlotSequence - zero is not valid
 ---
 
 (source_file
-  (slot_sequence)
-  (integer))
+  (slot_sequence))
 
 ================
 Slot in pure function

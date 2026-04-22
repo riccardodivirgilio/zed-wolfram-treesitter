@@ -204,14 +204,14 @@
 
       symbol: ($) => token(seq(optional("`"), repeat(seq(SYMBOL_NAME, "`")), SYMBOL_NAME)),
 
-      integer: ($) => /([0-9]+\^\^)?[0-9a-zA-Z]+`{0,2}[0-9]*(\*\^-?[0-9]+)?/,
+      integer: ($) => /([0-9]+\^\^[0-9a-zA-Z]+|[0-9]+)`{0,2}[0-9]*(\*\^-?[0-9]+)?/,
 
-      real: ($) => /([0-9]+\^\^)?([0-9a-zA-Z]+\.[0-9a-zA-Z]*|\.[0-9a-zA-Z]+)`{0,2}[0-9]*(\*\^-?[0-9]+)?/,
+      real: ($) => /(([0-9]+\^\^)([0-9a-zA-Z]+\.[0-9a-zA-Z]*|\.[0-9a-zA-Z]+)|[0-9]+\.[0-9]*|\.[0-9]+)`{0,2}[0-9]*(\*\^-?[0-9]+)?/,
 
       string: ($) => /\"([^\"\\]|\\(.|\n))*\"/,
 
-      // ## or ##n — SlotSequence (n >= 1)
-      slot_sequence: ($) => token(seq("##", optional(/[1-9][0-9]*/))),
+      // ## or ##n — SlotSequence
+      slot_sequence: ($) => token(seq("##", optional(/[0-9]+/))),
 
       // # or #n or #name or #"name" — Slot (n >= 0; names are valid symbol names)
       slot: ($) => token(seq("#", optional(choice(/[0-9]+/, SYMBOL_NAME, seq('"', /[^"]*/, '"'))))),
