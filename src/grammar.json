@@ -14,11 +14,20 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_leaf"
+          "name": "_non_prefix_expression"
         },
         {
           "type": "SYMBOL",
           "name": "prefix"
+        }
+      ]
+    },
+    "_non_prefix_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_leaf"
         },
         {
           "type": "SYMBOL",
@@ -55,6 +64,10 @@
         {
           "type": "SYMBOL",
           "name": "type_specifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "implicit_times"
         },
         {
           "type": "SYMBOL",
@@ -442,6 +455,27 @@
             ]
           }
         ]
+      }
+    },
+    "implicit_times": {
+      "type": "PREC_DYNAMIC",
+      "value": -1,
+      "content": {
+        "type": "PREC_LEFT",
+        "value": 108,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_non_prefix_expression"
+            }
+          ]
+        }
       }
     },
     "type_specifier": {
@@ -2097,7 +2131,55 @@
       "value": "\\s"
     }
   ],
-  "conflicts": [],
+  "conflicts": [
+    [
+      "implicit_times",
+      "prefix",
+      "call"
+    ],
+    [
+      "implicit_times",
+      "prefix",
+      "postfix"
+    ],
+    [
+      "implicit_times",
+      "prefix",
+      "infix",
+      "call"
+    ],
+    [
+      "implicit_times",
+      "prefix",
+      "postfix",
+      "infix"
+    ],
+    [
+      "implicit_times",
+      "binary",
+      "call"
+    ],
+    [
+      "implicit_times",
+      "postfix",
+      "binary"
+    ],
+    [
+      "implicit_times",
+      "binary",
+      "span"
+    ],
+    [
+      "implicit_times",
+      "infix",
+      "call"
+    ],
+    [
+      "implicit_times",
+      "postfix",
+      "infix"
+    ]
+  ],
   "precedences": [],
   "externals": [
     {
