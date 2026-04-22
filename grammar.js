@@ -197,6 +197,8 @@
           $.part,
           $.span,
           $.pattern,
+          $.message_name,
+          $.freeform_evaluate,
           $.group,
         ),
 
@@ -248,6 +250,27 @@
           field("constraint", choice($.blank, $.blank_default, $.blank_sequence, $.blank_null_sequence)),
         )),
 
+      // f::name is MessageName[f, "name"], f::name::lang is MessageName[f, "name", "lang"]
+      // The tags after :: are unquoted strings, not symbols
+      message_name: ($) =>
+        prec.left(PRECEDENCE_COLONCOLON, seq(
+          $._expression,
+          "::",
+          alias(token.immediate(SYMBOL_NAME), $.message_tag),
+          optional(seq(
+            token.immediate("::"),
+            alias(token.immediate(SYMBOL_NAME), $.message_tag),
+          )),
+        )),
+
+      // =[content] is FreeformEvaluate["content"]
+      // The content between [ and ] is raw text, not parsed as expressions
+      freeform_evaluate: ($) =>
+        seq(
+          token(seq("=", "[")),
+          optional(alias(/[^\]]+/, $.freeform_content)),
+          "]",
+        ),
 
       prefix: ($) =>
         choice(

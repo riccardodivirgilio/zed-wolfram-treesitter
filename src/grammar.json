@@ -50,6 +50,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "message_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "freeform_evaluate"
+        },
+        {
+          "type": "SYMBOL",
           "name": "group"
         }
       ]
@@ -370,6 +378,109 @@
           }
         ]
       }
+    },
+    "message_name": {
+      "type": "PREC_LEFT",
+      "value": 184,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "STRING",
+            "value": "::"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "[$a-zA-Z][$a-zA-Z0-9]*"
+              }
+            },
+            "named": true,
+            "value": "message_tag"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "STRING",
+                      "value": "::"
+                    }
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "IMMEDIATE_TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "[$a-zA-Z][$a-zA-Z0-9]*"
+                      }
+                    },
+                    "named": true,
+                    "value": "message_tag"
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "freeform_evaluate": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "="
+              },
+              {
+                "type": "STRING",
+                "value": "["
+              }
+            ]
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[^\\]]+"
+              },
+              "named": true,
+              "value": "freeform_content"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
     },
     "prefix": {
       "type": "CHOICE",

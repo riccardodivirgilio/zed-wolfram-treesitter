@@ -411,3 +411,93 @@ f /: f[x_] = 1
           name: (symbol)
           constraint: (blank))))
     (integer)))
+
+================
+MessageName - simple
+================
+
+f::usage
+
+---
+
+(source_file
+  (message_name
+    (symbol)
+    (message_tag)))
+
+================
+MessageName - with language
+================
+
+f::usage::English
+
+---
+
+(source_file
+  (message_name
+    (symbol)
+    (message_tag)
+    (message_tag)))
+
+================
+MessageName - dollar prefix tag
+================
+
+f::$Failed
+
+---
+
+(source_file
+  (message_name
+    (symbol)
+    (message_tag)))
+
+================
+MessageName - complex LHS
+================
+
+f[x]::usage
+
+---
+
+(source_file
+  (message_name
+    (call
+      head: (symbol)
+      arguments: (symbol))
+    (message_tag)))
+
+================
+FreeformEvaluate - simple
+================
+
+=[hello]
+
+---
+
+(source_file
+  (freeform_evaluate
+    (freeform_content)))
+
+================
+FreeformEvaluate - with spaces
+================
+
+=[hello world]
+
+---
+
+(source_file
+  (freeform_evaluate
+    (freeform_content)))
+
+================
+FreeformEvaluate - empty
+================
+
+=[]
+
+---
+
+(source_file
+  (freeform_evaluate))
