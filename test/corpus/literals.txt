@@ -98,6 +98,18 @@ String with backtick
   (string))
 
 ================
+String with escaped newline
+================
+
+"\
+"
+
+---
+
+(source_file
+  (string))
+
+================
 Symbol - simple
 ================
 
