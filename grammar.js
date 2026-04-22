@@ -172,6 +172,9 @@
   (PRECEDENCE_SYMBOL = 188), // prec: 94, assoc: Associativity`NonRight
   (PRECEDENCE_UNDER = 188), // prec: 94, assoc: Associativity`NonRight
   (PRECEDENCE_ASSERTFALSE = 190), // prec: 95, assoc: Associativity`NonRight
+  // Base pattern for a symbol name segment (no context backticks)
+  (SYMBOL_NAME = /[$a-zA-Z][$a-zA-Z0-9]*/),
+
   (module.exports = grammar({
     name: "wolfram",
 
@@ -197,15 +200,21 @@
           $.group,
         ),
 
-      _leaf: ($) => choice($.symbol, $.integer, $.real, $.string, $.blank, $.blank_default, $.blank_sequence, $.blank_null_sequence),
+      _leaf: ($) => choice($.symbol, $.integer, $.real, $.string, $.slot, $.slot_sequence, $.blank, $.blank_default, $.blank_sequence, $.blank_null_sequence),
 
-      symbol: ($) => /`?(\$?[a-zA-Z][a-zA-Z0-9\$]*`)*\$?[a-zA-Z][a-zA-Z0-9\$]*/,
+      symbol: ($) => token(seq(optional("`"), repeat(seq(SYMBOL_NAME, "`")), SYMBOL_NAME)),
 
       integer: ($) => /([0-9]+\^\^)?[0-9a-zA-Z]+`{0,2}[0-9]*(\*\^-?[0-9]+)?/,
 
       real: ($) => /([0-9]+\^\^)?([0-9a-zA-Z]+\.[0-9a-zA-Z]*|\.[0-9a-zA-Z]+)`{0,2}[0-9]*(\*\^-?[0-9]+)?/,
 
       string: ($) => /\"([^\"\\]|\\(.|\n))*\"/,
+
+      // ## or ##n — SlotSequence (n >= 1)
+      slot_sequence: ($) => token(seq("##", optional(/[1-9][0-9]*/))),
+
+      // # or #n or #name or #"name" — Slot (n >= 0; names are valid symbol names)
+      slot: ($) => token(seq("#", optional(choice(/[0-9]+/, SYMBOL_NAME, seq('"', /[^"]*/, '"'))))),
 
       // _ with optional head: _, _Integer
       blank: ($) =>

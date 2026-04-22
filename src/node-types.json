@@ -64,6 +64,14 @@
           "named": true
         },
         {
+          "type": "slot",
+          "named": true
+        },
+        {
+          "type": "slot_sequence",
+          "named": true
+        },
+        {
           "type": "span",
           "named": true
         },
@@ -163,6 +171,14 @@
             "named": true
           },
           {
+            "type": "slot",
+            "named": true
+          },
+          {
+            "type": "slot_sequence",
+            "named": true
+          },
+          {
             "type": "span",
             "named": true
           },
@@ -234,6 +250,14 @@
           },
           {
             "type": "real",
+            "named": true
+          },
+          {
+            "type": "slot",
+            "named": true
+          },
+          {
+            "type": "slot_sequence",
             "named": true
           },
           {
@@ -317,6 +341,14 @@
           "named": true
         },
         {
+          "type": "slot",
+          "named": true
+        },
+        {
+          "type": "slot_sequence",
+          "named": true
+        },
+        {
           "type": "span",
           "named": true
         },
@@ -393,6 +425,14 @@
         },
         {
           "type": "real",
+          "named": true
+        },
+        {
+          "type": "slot",
+          "named": true
+        },
+        {
+          "type": "slot_sequence",
           "named": true
         },
         {
@@ -475,6 +515,14 @@
             "named": true
           },
           {
+            "type": "slot",
+            "named": true
+          },
+          {
+            "type": "slot_sequence",
+            "named": true
+          },
+          {
             "type": "span",
             "named": true
           },
@@ -546,6 +594,14 @@
           },
           {
             "type": "real",
+            "named": true
+          },
+          {
+            "type": "slot",
+            "named": true
+          },
+          {
+            "type": "slot_sequence",
             "named": true
           },
           {
@@ -667,6 +723,14 @@
           "named": true
         },
         {
+          "type": "slot",
+          "named": true
+        },
+        {
+          "type": "slot_sequence",
+          "named": true
+        },
+        {
           "type": "span",
           "named": true
         },
@@ -743,6 +807,14 @@
         },
         {
           "type": "real",
+          "named": true
+        },
+        {
+          "type": "slot",
+          "named": true
+        },
+        {
+          "type": "slot_sequence",
           "named": true
         },
         {
@@ -826,6 +898,14 @@
           "named": true
         },
         {
+          "type": "slot",
+          "named": true
+        },
+        {
+          "type": "slot_sequence",
+          "named": true
+        },
+        {
           "type": "span",
           "named": true
         },
@@ -902,6 +982,14 @@
         },
         {
           "type": "real",
+          "named": true
+        },
+        {
+          "type": "slot",
+          "named": true
+        },
+        {
+          "type": "slot_sequence",
           "named": true
         },
         {
@@ -1190,6 +1278,14 @@
   },
   {
     "type": "real",
+    "named": true
+  },
+  {
+    "type": "slot",
+    "named": true
+  },
+  {
+    "type": "slot_sequence",
     "named": true
   },
   {
