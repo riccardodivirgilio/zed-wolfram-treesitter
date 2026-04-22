@@ -198,6 +198,7 @@
           $.span,
           $.pattern,
           $.message_name,
+          $.type_specifier,
           $.freeform_evaluate,
           $.group,
         ),
@@ -261,6 +262,16 @@
             token.immediate("::"),
             alias(token.immediate(SYMBOL_NAME), $.message_tag),
           )),
+        )),
+
+      // "Type"::["arg1", "arg2"] is TypeSpecifier["Type", "arg1", "arg2"]
+      type_specifier: ($) =>
+        prec.left(PRECEDENCE_COLONCOLON, seq(
+          $._expression,
+          "::",
+          "[",
+          optional(field("arguments", $._expression)),
+          "]",
         )),
 
       // =[content] is FreeformEvaluate["content"]

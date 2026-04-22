@@ -54,6 +54,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "type_specifier"
+        },
+        {
+          "type": "SYMBOL",
           "name": "freeform_evaluate"
         },
         {
@@ -436,6 +440,47 @@
                 "type": "BLANK"
               }
             ]
+          }
+        ]
+      }
+    },
+    "type_specifier": {
+      "type": "PREC_LEFT",
+      "value": 184,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "STRING",
+            "value": "::"
+          },
+          {
+            "type": "STRING",
+            "value": "["
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "arguments",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expression"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": "]"
           }
         ]
       }
