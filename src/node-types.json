@@ -40,10 +40,6 @@
           "named": true
         },
         {
-          "type": "implicit_times",
-          "named": true
-        },
-        {
           "type": "infix",
           "named": true
         },
@@ -175,10 +171,6 @@
             "named": true
           },
           {
-            "type": "implicit_times",
-            "named": true
-          },
-          {
             "type": "infix",
             "named": true
           },
@@ -282,10 +274,6 @@
           },
           {
             "type": "group",
-            "named": true
-          },
-          {
-            "type": "implicit_times",
             "named": true
           },
           {
@@ -416,125 +404,6 @@
           "named": true
         },
         {
-          "type": "implicit_times",
-          "named": true
-        },
-        {
-          "type": "infix",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        },
-        {
-          "type": "message_name",
-          "named": true
-        },
-        {
-          "type": "named_character",
-          "named": true
-        },
-        {
-          "type": "out",
-          "named": true
-        },
-        {
-          "type": "part",
-          "named": true
-        },
-        {
-          "type": "pattern",
-          "named": true
-        },
-        {
-          "type": "postfix",
-          "named": true
-        },
-        {
-          "type": "prefix",
-          "named": true
-        },
-        {
-          "type": "real",
-          "named": true
-        },
-        {
-          "type": "slot",
-          "named": true
-        },
-        {
-          "type": "slot_sequence",
-          "named": true
-        },
-        {
-          "type": "span",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "symbol",
-          "named": true
-        },
-        {
-          "type": "tilde",
-          "named": true
-        },
-        {
-          "type": "type_specifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "implicit_times",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "binary",
-          "named": true
-        },
-        {
-          "type": "blank",
-          "named": true
-        },
-        {
-          "type": "blank_default",
-          "named": true
-        },
-        {
-          "type": "blank_null_sequence",
-          "named": true
-        },
-        {
-          "type": "blank_sequence",
-          "named": true
-        },
-        {
-          "type": "call",
-          "named": true
-        },
-        {
-          "type": "freeform_evaluate",
-          "named": true
-        },
-        {
-          "type": "group",
-          "named": true
-        },
-        {
-          "type": "implicit_times",
-          "named": true
-        },
-        {
           "type": "infix",
           "named": true
         },
@@ -646,10 +515,6 @@
           "named": true
         },
         {
-          "type": "implicit_times",
-          "named": true
-        },
-        {
           "type": "infix",
           "named": true
         },
@@ -758,10 +623,6 @@
         },
         {
           "type": "group",
-          "named": true
-        },
-        {
-          "type": "implicit_times",
           "named": true
         },
         {
@@ -880,10 +741,6 @@
             "named": true
           },
           {
-            "type": "implicit_times",
-            "named": true
-          },
-          {
             "type": "infix",
             "named": true
           },
@@ -987,10 +844,6 @@
           },
           {
             "type": "group",
-            "named": true
-          },
-          {
-            "type": "implicit_times",
             "named": true
           },
           {
@@ -1144,10 +997,6 @@
           "named": true
         },
         {
-          "type": "implicit_times",
-          "named": true
-        },
-        {
           "type": "infix",
           "named": true
         },
@@ -1256,10 +1105,6 @@
         },
         {
           "type": "group",
-          "named": true
-        },
-        {
-          "type": "implicit_times",
           "named": true
         },
         {
@@ -1375,10 +1220,6 @@
           "named": true
         },
         {
-          "type": "implicit_times",
-          "named": true
-        },
-        {
           "type": "infix",
           "named": true
         },
@@ -1487,10 +1328,6 @@
         },
         {
           "type": "group",
-          "named": true
-        },
-        {
-          "type": "implicit_times",
           "named": true
         },
         {
@@ -1605,10 +1442,6 @@
             "named": true
           },
           {
-            "type": "implicit_times",
-            "named": true
-          },
-          {
             "type": "infix",
             "named": true
           },
@@ -1713,10 +1546,6 @@
         },
         {
           "type": "group",
-          "named": true
-        },
-        {
-          "type": "implicit_times",
           "named": true
         },
         {
@@ -1831,10 +1660,6 @@
             "named": true
           },
           {
-            "type": "implicit_times",
-            "named": true
-          },
-          {
             "type": "infix",
             "named": true
           },
@@ -1939,10 +1764,6 @@
         },
         {
           "type": "group",
-          "named": true
-        },
-        {
-          "type": "implicit_times",
           "named": true
         },
         {
