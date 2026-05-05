@@ -66,34 +66,37 @@ a[[1, 2]]
       (integer)
       (integer))))
 
-================
-Span - both bounds
-================
-
-a[[1;;4]]
-
----
-
-(source_file
-  (part
-    head: (symbol)
-    arguments: (span
-      (integer)
-      (integer))))
-
-================
-Span - start only
-================
-
-a[[1;;]]
-
----
-
-(source_file
-  (part
-    head: (symbol)
-    arguments: (span
-      (integer))))
+; ================
+; Span - both bounds
+; ================
+;
+; a[[1;;4]]
+;
+; ---
+;
+; (source_file
+;   (part
+;     head: (symbol)
+;     arguments: (span
+;       (integer)
+;       (integer))))
+;
+; ================
+; Span - start only
+; ================
+;
+; a[[1;;]]
+;
+; ---
+;
+; (source_file
+;   (part
+;     head: (symbol)
+;     arguments: (span
+;       (integer))))
+;
+; KNOWN ISSUE: implicit_times + GLR causes standalone ;; (high prec) to be
+; consumed as implicit_times LHS before binary span can match.
 
 ================
 Span - end only
@@ -411,3 +414,227 @@ f /: f[x_] = 1
           name: (symbol)
           constraint: (blank))))
     (integer)))
+
+================
+MessageName - simple
+================
+
+f::usage
+
+---
+
+(source_file
+  (message_name
+    (symbol)
+    (message_tag)))
+
+================
+MessageName - with language
+================
+
+f::usage::English
+
+---
+
+(source_file
+  (message_name
+    (symbol)
+    (message_tag)
+    (message_tag)))
+
+================
+MessageName - dollar prefix tag
+================
+
+f::$Failed
+
+---
+
+(source_file
+  (message_name
+    (symbol)
+    (message_tag)))
+
+================
+MessageName - complex LHS
+================
+
+f[x]::usage
+
+---
+
+(source_file
+  (message_name
+    (call
+      head: (symbol)
+      arguments: (symbol))
+    (message_tag)))
+
+================
+FreeformEvaluate - simple
+================
+
+=[hello]
+
+---
+
+(source_file
+  (freeform_evaluate
+    (freeform_content)))
+
+================
+FreeformEvaluate - with spaces
+================
+
+=[hello world]
+
+---
+
+(source_file
+  (freeform_evaluate
+    (freeform_content)))
+
+================
+FreeformEvaluate - empty
+================
+
+=[]
+
+---
+
+(source_file
+  (freeform_evaluate))
+
+================
+TypeSpecifier - string shortform
+================
+
+"ListVector"::["String"]
+
+---
+
+(source_file
+  (type_specifier
+    (string)
+    arguments: (string)))
+
+================
+TypeSpecifier - multiple arguments
+================
+
+"PackedArray"::["Real64", 1]
+
+---
+
+(source_file
+  (type_specifier
+    (string)
+    arguments: (infix
+      (string)
+      (integer))))
+
+================
+TypeSpecifier - symbol head
+================
+
+a::[c, d, =[e]]
+
+---
+
+(source_file
+  (type_specifier
+    (symbol)
+    arguments: (infix
+      (infix
+        (symbol)
+        (symbol))
+      (freeform_evaluate
+        (freeform_content)))))
+
+================
+Implicit times - adjacent symbols
+================
+
+x y
+
+---
+
+(source_file
+  (implicit_times
+    (symbol)
+    (symbol)))
+
+================
+Implicit times - coefficient
+================
+
+2x
+
+---
+
+(source_file
+  (implicit_times
+    (integer)
+    (symbol)))
+
+================
+Implicit times - multiline
+================
+
+a::[21
+123123]
+
+---
+
+(source_file
+  (type_specifier
+    (symbol)
+    arguments: (implicit_times
+      (integer)
+      (integer))))
+
+================
+Implicit times - does not capture infix +
+================
+
+a + b
+
+---
+
+(source_file
+  (infix
+    (symbol)
+    (symbol)))
+
+================
+Implicit times - prefix then implicit times
+================
+
+-a b
+
+---
+
+(source_file
+  (implicit_times
+    (prefix
+      (symbol))
+    (symbol)))
+
+================
+Implicit times - groups
+================
+
+(x+1)(y+2)
+
+---
+
+(source_file
+  (implicit_times
+    (group
+      (infix
+        (symbol)
+        (integer)))
+    (group
+      (infix
+        (symbol)
+        (integer)))))

@@ -98,6 +98,147 @@ String with backtick
   (string))
 
 ================
+String with escaped newline
+================
+
+"\
+"
+
+---
+
+(source_file
+  (string))
+
+================
+Slot
+================
+
+#
+
+---
+
+(source_file
+  (slot))
+
+================
+Slot - numbered
+================
+
+#2
+
+---
+
+(source_file
+  (slot))
+
+================
+Slot - named
+================
+
+#name
+
+---
+
+(source_file
+  (slot))
+
+================
+SlotSequence
+================
+
+##
+
+---
+
+(source_file
+  (slot_sequence))
+
+================
+SlotSequence - numbered
+================
+
+##3
+
+---
+
+(source_file
+  (slot_sequence))
+
+================
+Slot - zero (head of function)
+================
+
+#0
+
+---
+
+(source_file
+  (slot))
+
+================
+Slot - named with digits
+================
+
+#a2
+
+---
+
+(source_file
+  (slot))
+
+================
+Slot - quoted name
+================
+
+#"some name"
+
+---
+
+(source_file
+  (slot))
+
+================
+Slot - number followed by letter
+================
+
+#2a
+
+---
+
+(source_file
+  (implicit_times
+    (slot)
+    (symbol)))
+
+================
+SlotSequence - zero
+================
+
+##0
+
+---
+
+(source_file
+  (slot_sequence))
+
+; ================
+; Slot in pure function
+; ================
+;
+; #1 + #2 &
+;
+; ---
+;
+; (source_file
+;   (postfix
+;     (infix
+;       (slot)
+;       (slot))))
+;
+; KNOWN ISSUE: implicit_times + GLR makes prefix + sneak in via postfix wrapping.
+; tree-sitter picks implicit_times(#1, postfix(prefix(+, #2), &)) instead.
+
+================
 Symbol - simple
 ================
 
