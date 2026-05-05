@@ -178,26 +178,26 @@
   (module.exports = grammar({
     name: "wolfram",
 
-    extras: ($) => [$.comment, /\s/],
+    extras: ($) => [$.comment, $._internal_newline, /[ \t\r]/],
 
-    externals: ($) => [$.comment],
+    externals: ($) => [$.comment, $._toplevel_newline, $._internal_newline, $._bracket_open, $._bracket_close, $._error_sentinel],
 
     // implicit_times (expr expr) creates GLR ambiguity with certain operator
     // combinations. Only the conflict sets tree-sitter actually needs are listed.
     conflicts: ($) => [
-      [$.implicit_times, $.prefix, $.call],
+      [$.implicit_times, $.prefix, $.call, $.part],
       [$.implicit_times, $.prefix, $.postfix],
-      [$.implicit_times, $.prefix, $.infix, $.call],
+      [$.implicit_times, $.prefix, $.infix, $.call, $.part],
       [$.implicit_times, $.prefix, $.postfix, $.infix],
-      [$.implicit_times, $.binary, $.call],
+      [$.implicit_times, $.binary, $.call, $.part],
       [$.implicit_times, $.postfix, $.binary],
       [$.implicit_times, $.binary, $.span],
-      [$.implicit_times, $.infix, $.call],
+      [$.implicit_times, $.infix, $.call, $.part],
       [$.implicit_times, $.postfix, $.infix],
     ],
 
     rules: {
-      source_file: ($) => repeat($._expression),
+      source_file: ($) => repeat(choice($._expression, $._toplevel_newline)),
 
       _expression: ($) =>
         choice(
@@ -297,18 +297,18 @@
         prec.left(PRECEDENCE_COLONCOLON, seq(
           $._expression,
           "::",
-          "[",
+          $._bracket_open, "[",
           optional(field("arguments", $._expression)),
-          "]",
+          "]", $._bracket_close,
         )),
 
       // =[content] is FreeformEvaluate["content"]
       // The content between [ and ] is raw text, not parsed as expressions
       freeform_evaluate: ($) =>
         seq(
-          token(seq("=", "[")),
+          $._bracket_open, token(seq("=", "[")),
           optional(alias(/[^\]]+/, $.freeform_content)),
-          "]",
+          "]", $._bracket_close,
         ),
 
       prefix: ($) =>
@@ -504,9 +504,9 @@
           PRECEDENCE_CALL,
           seq(
             field("head", $._expression),
-            "[",
+            $._bracket_open, "[",
             optional(field("arguments", $._expression)),
-            "]",
+            "]", $._bracket_close,
           ),
         ),
 
@@ -515,9 +515,9 @@
           PRECEDENCE_CALL,
           seq(
             field("head", $._expression),
-            "[[",
+            $._bracket_open, "[[",
             optional(field("arguments", $._expression)),
-            "]]",
+            "]]", $._bracket_close,
           ),
         ),
 
@@ -543,10 +543,10 @@
 
       group: ($) =>
         choice(
-          seq("{", optional($._expression), "}"),
-          seq("(", optional($._expression), ")"),
-          seq("[", optional($._expression), "]"),
-          seq("<|", optional($._expression), "|>"),
+          seq($._bracket_open, "{", optional($._expression), "}", $._bracket_close),
+          seq($._bracket_open, "(", optional($._expression), ")", $._bracket_close),
+          seq($._bracket_open, "[", optional($._expression), "]", $._bracket_close),
+          seq($._bracket_open, "<|", optional($._expression), "|>", $._bracket_close),
         ),
     },
   })));
