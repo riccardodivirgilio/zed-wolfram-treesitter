@@ -194,6 +194,9 @@
       [$.implicit_times, $.binary, $.span],
       [$.implicit_times, $.infix, $.call],
       [$.implicit_times, $.postfix, $.infix],
+      [$.implicit_times, $.infix, $.span],
+      [$.implicit_times, $.call, $.tilde],
+      [$.implicit_times, $.postfix, $.tilde],
     ],
 
     rules: {
@@ -223,9 +226,11 @@
           $.implicit_times,
           $.freeform_evaluate,
           $.group,
+          $.message_name,
+          $.tilde,
         ),
 
-      _leaf: ($) => choice($.symbol, $.integer, $.real, $.string, $.slot, $.slot_sequence, $.blank, $.blank_default, $.blank_sequence, $.blank_null_sequence),
+      _leaf: ($) => choice($.symbol, $.integer, $.real, $.string, $.slot, $.slot_sequence, $.blank, $.blank_default, $.blank_sequence, $.blank_null_sequence, $.named_character, $.out),
 
       symbol: ($) => token(seq(optional("`"), repeat(seq(SYMBOL_NAME, "`")), SYMBOL_NAME)),
 
@@ -265,6 +270,10 @@
           "___",
           optional(token.immediate(/[a-zA-Z][a-zA-Z0-9$]*/)),
         )),
+
+      named_character: ($) => /\\\[[A-Z][a-zA-Z]*\]/,
+
+      out: ($) => /%+[0-9]*/,
 
       // x_ is Pattern[x, Blank[]], x_Integer is Pattern[x, Blank[Integer]]
       pattern: ($) =>
@@ -319,6 +328,18 @@
           prec(PRECEDENCE_PREFIX_PLUS, seq("+", $._expression)),
           prec(PRECEDENCE_PREFIX_PLUSPLUS, seq("++", $._expression)),
           prec(PRECEDENCE_PREFIX_MINUSMINUS, seq("--", $._expression)),
+          prec(PRECEDENCE_LONGNAME_NOT, seq("\\[Not]", $._expression)),
+          prec(PRECEDENCE_LONGNAME_FORALL, seq("\\[ForAll]", $._expression)),
+          prec(PRECEDENCE_LONGNAME_EXISTS, seq("\\[Exists]", $._expression)),
+          prec(PRECEDENCE_LONGNAME_NOTEXISTS, seq("\\[NotExists]", $._expression)),
+          prec(PRECEDENCE_PREFIX_LONGNAME_PLUSMINUS, seq("\\[PlusMinus]", $._expression)),
+          prec(PRECEDENCE_PREFIX_LONGNAME_MINUSPLUS, seq("\\[MinusPlus]", $._expression)),
+          prec(PRECEDENCE_PREFIX_LONGNAME_MINUS, seq("\\[Minus]", $._expression)),
+          prec(PRECEDENCE_LONGNAME_SQRT, seq("\\[Sqrt]", $._expression)),
+          prec(PRECEDENCE_LONGNAME_CUBEROOT, seq("\\[CubeRoot]", $._expression)),
+          prec(PRECEDENCE_LONGNAME_DEL, seq("\\[Del]", $._expression)),
+          prec(PRECEDENCE_LONGNAME_SQUARE, seq("\\[Square]", $._expression)),
+          prec(PRECEDENCE_LESSLESS, seq("<<", $._expression)),
         ),
 
       postfix: ($) =>
@@ -332,6 +353,10 @@
           prec(PRECEDENCE_POSTFIX_MINUSMINUS, seq($._expression, "--")),
           prec(PRECEDENCE_POSTFIX_PLUSPLUS, seq($._expression, "++")),
           prec(PRECEDENCE_FAKE_EQUALDOT, seq($._expression, "=.")),
+          prec(PRECEDENCE_LONGNAME_TRANSPOSE, seq($._expression, "\\[Transpose]")),
+          prec(PRECEDENCE_LONGNAME_CONJUGATE, seq($._expression, "\\[Conjugate]")),
+          prec(PRECEDENCE_LONGNAME_CONJUGATETRANSPOSE, seq($._expression, "\\[ConjugateTranspose]")),
+          prec(PRECEDENCE_LONGNAME_HERMITIANCONJUGATE, seq($._expression, "\\[HermitianConjugate]")),
         ),
 
       binary: ($) =>
@@ -429,6 +454,16 @@
             PRECEDENCE_FAKE_PATTERNCOLON,
             seq($._expression, ":", $._expression),
           ),
+          prec.right(PRECEDENCE_LONGNAME_FUNCTION, seq($._expression, "\\[Function]", $._expression)),
+          prec.right(PRECEDENCE_LONGNAME_RULE, seq($._expression, "\\[Rule]", $._expression)),
+          prec.right(PRECEDENCE_LONGNAME_RULEDELAYED, seq($._expression, "\\[RuleDelayed]", $._expression)),
+          prec.right(PRECEDENCE_LONGNAME_TWOWAYRULE, seq($._expression, "\\[TwoWayRule]", $._expression)),
+          prec.right(PRECEDENCE_LONGNAME_IMPLIES, seq($._expression, "\\[Implies]", $._expression)),
+          prec.right(PRECEDENCE_LONGNAME_ROUNDIMPLIES, seq($._expression, "\\[RoundImplies]", $._expression)),
+          prec.right(PRECEDENCE_LONGNAME_DIRECTEDEDGE, seq($._expression, "\\[DirectedEdge]", $._expression)),
+          prec.right(PRECEDENCE_LONGNAME_UNDIRECTEDEDGE, seq($._expression, "\\[UndirectedEdge]", $._expression)),
+          prec.left(PRECEDENCE_GREATERGREATER, seq($._expression, ">>", $._expression)),
+          prec.left(PRECEDENCE_GREATERGREATERGREATER, seq($._expression, ">>>", $._expression)),
         ),
 
       infix: ($) =>
@@ -497,6 +532,21 @@
             seq($._expression, "/*", $._expression),
           ),
           prec.left(PRECEDENCE_ATSTAR, seq($._expression, "@*", $._expression)),
+          prec.left(PRECEDENCE_LONGNAME_EQUIVALENT, seq($._expression, "\\[Equivalent]", $._expression)),
+          prec.left(PRECEDENCE_LONGNAME_OR, seq($._expression, "\\[Or]", $._expression)),
+          prec.left(PRECEDENCE_LONGNAME_NOR, seq($._expression, "\\[Nor]", $._expression)),
+          prec.left(PRECEDENCE_LONGNAME_XOR, seq($._expression, "\\[Xor]", $._expression)),
+          prec.left(PRECEDENCE_LONGNAME_XNOR, seq($._expression, "\\[Xnor]", $._expression)),
+          prec.left(PRECEDENCE_LONGNAME_AND, seq($._expression, "\\[And]", $._expression)),
+          prec.left(PRECEDENCE_LONGNAME_NAND, seq($._expression, "\\[Nand]", $._expression)),
+          prec.left(PRECEDENCE_LONGNAME_TIMES, seq($._expression, "\\[Times]", $._expression)),
+          prec.left(PRECEDENCE_LONGNAME_INVISIBLETIMES, seq($._expression, "\\[InvisibleTimes]", $._expression)),
+          prec.left(PRECEDENCE_LONGNAME_DIVIDE, seq($._expression, "\\[Divide]", $._expression)),
+          prec.left(PRECEDENCE_LONGNAME_DIVIDES, seq($._expression, "\\[Divides]", $._expression)),
+          prec.left(PRECEDENCE_LONGNAME_DIVISIONSLASH, seq($._expression, "\\[DivisionSlash]", $._expression)),
+          prec.left(PRECEDENCE_INFIX_LONGNAME_MINUS, seq($._expression, "\\[Minus]", $._expression)),
+          prec.left(PRECEDENCE_INFIX_LONGNAME_PLUSMINUS, seq($._expression, "\\[PlusMinus]", $._expression)),
+          prec.left(PRECEDENCE_INFIX_LONGNAME_MINUSPLUS, seq($._expression, "\\[MinusPlus]", $._expression)),
         ),
 
       call: ($) =>
@@ -540,6 +590,15 @@
             ";;",
           ),
         ),
+
+      tilde: ($) =>
+        prec.left(PRECEDENCE_TILDE, seq(
+          $._expression,
+          "~",
+          field("function", $._expression),
+          "~",
+          $._expression,
+        )),
 
       group: ($) =>
         choice(
