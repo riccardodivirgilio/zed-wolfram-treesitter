@@ -182,38 +182,14 @@
 
     externals: ($) => [$.comment],
 
-    // implicit_times (expr expr) creates GLR ambiguity with certain operator
-    // combinations. Only the conflict sets tree-sitter actually needs are listed.
-    conflicts: ($) => [
-      [$.implicit_times, $.prefix, $.call],
-      [$.implicit_times, $.prefix, $.postfix],
-      [$.implicit_times, $.prefix, $.infix, $.call],
-      [$.implicit_times, $.prefix, $.postfix, $.infix],
-      [$.implicit_times, $.binary, $.call],
-      [$.implicit_times, $.postfix, $.binary],
-      [$.implicit_times, $.binary, $.span],
-      [$.implicit_times, $.infix, $.call],
-      [$.implicit_times, $.postfix, $.infix],
-      [$.implicit_times, $.infix, $.span],
-      [$.implicit_times, $.call, $.tilde],
-      [$.implicit_times, $.postfix, $.tilde],
-    ],
 
     rules: {
       source_file: ($) => repeat($._expression),
 
       _expression: ($) =>
         choice(
-          $._non_prefix_expression,
-          $.prefix,
-        ),
-
-      // Expressions that don't start with a prefix operator.
-      // Used as the RHS of implicit_times: between two complete expressions,
-      // tokens like + - are always infix, and ! ++ -- are always postfix on the LHS.
-      _non_prefix_expression: ($) =>
-        choice(
           $._leaf,
+          $.prefix,
           $.postfix,
           $.binary,
           $.infix,
@@ -223,7 +199,6 @@
           $.pattern,
           $.message_name,
           $.type_specifier,
-          $.implicit_times,
           $.freeform_evaluate,
           $.group,
           $.message_name,
@@ -294,12 +269,6 @@
             alias(token.immediate(SYMBOL_NAME), $.message_tag),
           )),
         )),
-
-      // 2 x or 2x is Times[2, x] (implicit multiplication)
-      // Dynamic precedence -1 ensures explicit operators (infix +, -, etc.) win
-      // over "implicit_times with prefix operator" when both parses are valid.
-      implicit_times: ($) =>
-        prec.dynamic(-1, prec.left(PRECEDENCE_FAKE_IMPLICITTIMES, seq($._expression, $._non_prefix_expression))),
 
       // "Type"::["arg1", "arg2"] is TypeSpecifier["Type", "arg1", "arg2"]
       type_specifier: ($) =>
